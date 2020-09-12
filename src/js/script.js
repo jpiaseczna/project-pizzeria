@@ -86,14 +86,24 @@
       menuContainer.appendChild(thisProduct.element);
     }
 
-    getElements(){
+    getElements() {
       const thisProduct = this;
 
-      thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
-      thisProduct.form = thisProduct.element.querySelector(select.menuProduct.form);
-      thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
-      thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
-      thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.accordionTrigger = thisProduct.element.querySelector(
+        select.menuProduct.clickable
+      );
+      thisProduct.form = thisProduct.element.querySelector(
+        select.menuProduct.form
+      );
+      thisProduct.formInputs = thisProduct.form.querySelectorAll(
+        select.all.formInputs
+      );
+      thisProduct.cartButton = thisProduct.element.querySelector(
+        select.menuProduct.cartButton
+      );
+      thisProduct.priceElem = thisProduct.element.querySelector(
+        select.menuProduct.priceElem
+      );
     }
 
     initAccordion() {
@@ -101,9 +111,9 @@
       console.log(thisProduct);
 
       /* START: click event listener to trigger */
-      thisProduct.accordionTrigger.addEventListener('click', function() {
+      thisProduct.accordionTrigger.addEventListener('click', function () {
         console.log('clicked');
-      
+
         /* prevent default action for event */
         event.preventDefault();
 
@@ -113,20 +123,18 @@
         /* find all active products */
         const activeProducts = document.querySelectorAll('.product, .active');
 
-          /* START LOOP: for each active product */
-          for (let activeProduct of activeProducts) {
-
-            /* START: if the active product isn't the element of thisProduct */
-            if (activeProduct != thisProduct.element) {
-
-              /* remove class active for the active product */
-              activeProduct.classList.remove('active');
+        /* START LOOP: for each active product */
+        for (let activeProduct of activeProducts) {
+          /* START: if the active product isn't the element of thisProduct */
+          if (activeProduct != thisProduct.element) {
+            /* remove class active for the active product */
+            activeProduct.classList.remove('active');
 
             /* END: if the active product isn't the element of thisProduct */
           }
-        /* END LOOP: for each active product */
+          /* END LOOP: for each active product */
         }
-      /* END: click event listener to trigger */
+        /* END: click event listener to trigger */
       });
     }
 
@@ -134,18 +142,18 @@
       const thisProduct = this;
       console.log('initOrderForm');
 
-      thisProduct.form.addEventListener('submit', function(event){
+      thisProduct.form.addEventListener('submit', function (event) {
         event.preventDefault();
         thisProduct.processOrder();
       });
 
-      for(let input of thisProduct.formInputs){
-        input.addEventListener('change', function(){
-        thisProduct.processOrder();
+      for (let input of thisProduct.formInputs) {
+        input.addEventListener('change', function () {
+          thisProduct.processOrder();
         });
       }
 
-      thisProduct.cartButton.addEventListener('click', function(event){
+      thisProduct.cartButton.addEventListener('click', function (event) {
         event.preventDefault();
         thisProduct.processOrder();
       });
@@ -154,6 +162,53 @@
     processOrder() {
       const thisProduct = this;
       console.log('processOrder');
+
+      const formData = utils.serializeFormToObject(thisProduct.form);
+      console.log('formData', formData);
+
+      let price = thisProduct.data.price;
+      console.log(price);
+
+      /* START LOOP: for each paramId in thisProduct.data.params*/
+      for (let paramId in thisProduct.data.params) {
+        console.log(paramId);
+        /* save the element in thisProduct.data.params with key paramId as const param */
+        const param = thisProduct.data.params[paramId];
+        console.log (param);
+
+        /* START LOOP: for each optionId in param.options */
+        for (let optionId in param.options) {
+          console.log(optionId);
+          /* save the element in param.options with key optionId as const option */
+          const option = param.options[optionId];
+
+          /* find selected options */
+
+          const optionSelected =
+            formData.hasOwnProperty(paramId) &&
+            formData[paramId].indexOf(optionId) > -1;
+            console.log(optionSelected);
+
+          /* START IF: if option is selected and option is not default */
+          if (optionSelected && !option.default) {
+            /* add price of option to variable price */
+            price += option.price;
+
+            /* END IF: if option is selected and option is not default */
+            /* START ELSE IF: if option is not selected and option is default */
+          } else if (!optionSelected && option.default) {
+            /* deduct price of option from price */
+            price -= option.price;
+
+            /* END ELSE IF: if option is not selected and option is default */
+          }
+          /* END LOOP: for each optionId in param.options */
+        }
+        /* END LOOP: for each paramId in thisProduct.data.params */
+      }
+
+      /* insert price into thisProduct.priceElem */
+      thisProduct.priceElem = thisProduct.price;
     }
   }
 
