@@ -187,7 +187,7 @@
           const optionSelected =
             formData.hasOwnProperty(paramId) &&
             formData[paramId].indexOf(optionId) > -1;
-          console.log(optionSelected);
+            console.log(optionSelected);
 
           /* START IF: if option is selected and option is not default */
           if (optionSelected && !option.default) {
@@ -208,7 +208,7 @@
       }
 
       /* insert price into thisProduct.priceElem */
-      thisProduct.priceElem.innerHTMl = price;
+      thisProduct.priceElem.innerHTML = price;
     }
   }
 
