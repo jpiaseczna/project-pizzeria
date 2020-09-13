@@ -121,7 +121,7 @@
         thisProduct.element.classList.toggle('active');
 
         /* find all active products */
-        const activeProducts = document.querySelectorAll('.product, .active');
+        const activeProducts = document.querySelectorAll('.product .active');
 
         /* START LOOP: for each active product */
         for (let activeProduct of activeProducts) {
@@ -187,7 +187,7 @@
           const optionSelected =
             formData.hasOwnProperty(paramId) &&
             formData[paramId].indexOf(optionId) > -1;
-            console.log(optionSelected);
+          console.log(optionSelected);
 
           /* START IF: if option is selected and option is not default */
           if (optionSelected && !option.default) {
@@ -208,7 +208,7 @@
       }
 
       /* insert price into thisProduct.priceElem */
-      thisProduct.priceElem = thisProduct.price;
+      thisProduct.priceElem.innerHTMl = price;
     }
   }
 
