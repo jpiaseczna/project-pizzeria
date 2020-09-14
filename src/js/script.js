@@ -256,6 +256,7 @@
 
       thisWidget.getElements(element);
       thisWidget.setValue(thisWidget.input.value);
+      thisWidget.initActions();
 
       console.log('AmountWidget:', thisWidget);
       console.log('constructor arguments:', element);
@@ -283,7 +284,7 @@
     }
 
     initActions() {
-      //const thisWidget = this;
+      const thisWidget = this;
 
       thisWidget.input.addEventListener('change', function(event) {
         thisWidget.input.setValue(thisWidget.input.value);
