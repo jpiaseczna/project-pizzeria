@@ -239,6 +239,9 @@
         /* END LOOP: for each paramId in thisProduct.data.params */
       }
 
+      /* multiply price by amount */
+      price *= thisProduct.amountWidget.value;
+
       /* insert price into thisProduct.priceElem */
       thisProduct.priceElem.innerHTML = price;
     }
@@ -247,6 +250,10 @@
       const thisProduct = this;
 
       thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+
+      thisProduct.amountWidgetElem.addEventListener('updated', function(event) {
+        thisProduct.processOrder();
+      });
     }
   }
 
@@ -279,6 +286,7 @@
       /* TODO: add validation */
 
       thisWidget.value = newValue;
+      thisWidget.announce();
       thisWidget.input.value = thisWidget.value;
     }
 
@@ -299,6 +307,13 @@
         thisWidget.setValue(thisWidget.value + 1);
       });
 
+    }
+
+    announce(){
+      const thisWidget = this;
+
+      const event = new Event('updated');
+      thisWidget.element.dispatchEvent(event);
     }
 
   }
