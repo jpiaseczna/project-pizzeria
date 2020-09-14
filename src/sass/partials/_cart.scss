@@ -124,3 +124,10 @@
   }
 
 }
+
+@media (max-width: 767px) {
+  .cart {
+    position: fixed;
+    border: 1px solid $color-dark;
+  }
+}
