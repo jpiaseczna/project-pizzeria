@@ -125,3 +125,15 @@
   }
 
 }
+
+@media (max-width: 767px) {
+  .product__wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product__order {
+    order: 1;
+    flex-direction: column;
+  }
+}
