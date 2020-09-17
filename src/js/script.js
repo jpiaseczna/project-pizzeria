@@ -418,7 +418,7 @@
 
       console.log('adding product', menuProduct); 
 
-      thisCart.products.push(menuProduct);
+      thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
       console.log('thisCart.products', thisCart.products);
     }
   }
