@@ -386,7 +386,6 @@
 
       thisCart.getElements(element);
       thisCart.initActions(element);
-      thisCart.remove();
 
       //console.log('new Cart', thisCart);
     }
