@@ -415,7 +415,7 @@
         thisCart.update();
       });
 
-      thisCart.dom.productList.addEventListener('remove', function() {
+      thisCart.dom.productList.addEventListener('remove', function(event) {
         thisCart.remove(event.detail.cartProduct);
       });
     }
@@ -468,7 +468,7 @@
     remove(cartProduct) {
       const thisCart = this;
 
-      const index = thisCart.products.indexOf('cartProduct');
+      const index = thisCart.products.indexOf(cartProduct);
       console.log(index);
 
       thisCart.products.splice(index);
