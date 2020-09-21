@@ -471,7 +471,7 @@
       const index = thisCart.products.indexOf(cartProduct);
       console.log(index);
 
-      thisCart.products.splice(index);
+      thisCart.products.splice(index, 1);
 
       cartProduct.dom.wrapper.remove();
 
@@ -493,7 +493,6 @@
       thisCartProduct.getElements(element);
       thisCartProduct.initAmountWidget();
       thisCartProduct.initActions();
-      thisCartProduct.remove();
 
       //console.log('new CartProduct', thisCartProduct);
       //console.log('productData', menuProduct);
