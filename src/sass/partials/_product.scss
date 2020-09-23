@@ -12,16 +12,11 @@
   &__header {
     @include flex(row, center, space-between);
     margin-bottom: ($base-size * 2);
-    font-family: $font-header;
-    font-size: 22px;
     cursor: pointer;
   }
 
   &__name {
     position: relative;
-    margin: 0;
-    font-weight: $font-semibold;
-    text-transform: uppercase;
   }
 
   &__icon {
@@ -54,9 +49,6 @@
   }
 
   &__params-title {
-    font-size: 14px;
-    font-weight: $font-bold;
-    text-transform: uppercase;
     margin: ($base-size * 2) 0;
   }
 
