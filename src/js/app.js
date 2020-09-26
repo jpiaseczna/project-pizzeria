@@ -1,5 +1,6 @@
 import {Product} from './components/Product.js';
 import {Cart} from './components/Cart.js';
+import {Booking} from './components/Booking.js';
 import {select, settings, classNames} from './settings.js';
 
 const app = {
@@ -50,6 +51,7 @@ const app = {
     thisApp.initPages();    
     thisApp.initData();
     thisApp.initCart();
+    thisApp.initBooking();
   },
 
   initCart: function () {
@@ -79,7 +81,7 @@ const app = {
 
       pagesMatchingHash = thisApp.pages.filter(function(page) {
         return page.id == idFromHash;
-      }); 
+      });
     }
 
     for(let link of thisApp.navLinks) {
@@ -89,13 +91,11 @@ const app = {
 
         /* TODO: get page id from href */
         const pageId = clickedElement.getAttribute('href').replace('#', '');
-        //const pageId = pageHREF.replace('#', ' ');
 
         /* TODO: activate page */
         thisApp.activatePage(pageId);
       });
     }
-
   },
 
   activatePage: function (pageId) {
@@ -110,6 +110,14 @@ const app = {
     }
 
     window.location.hash = '#/' + pageId;
+  },
+
+  initBooking: function () {
+    const thisApp = this;
+
+    const bookingWidgetContainer = document.querySelector(select.containerOf.booking);
+
+    thisApp.booking = new Booking(bookingWidgetContainer);
   },
 };
 
