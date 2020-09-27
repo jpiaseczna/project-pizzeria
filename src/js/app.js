@@ -71,13 +71,15 @@ const app = {
     const thisApp = this;
 
     thisApp.pages = Array.from(document.querySelector(select.containerOf.pages).children);
+    console.log(thisApp.pages);
 
     thisApp.navLinks = Array.from(document.querySelectorAll(select.nav.links));
+    console.log(thisApp.navLinks);
 
     let pagesMatchingHash = [];
 
     if(window.location.hash.length > 2) {
-      const idFromHash = window.location.hash.replace('#', '');
+      const idFromHash = window.location.hash.replace('#/', '');
 
       pagesMatchingHash = thisApp.pages.filter(function(page) {
         return page.id == idFromHash;
@@ -96,6 +98,8 @@ const app = {
         thisApp.activatePage(pageId);
       });
     }
+
+    thisApp.activatePage(pagesMatchingHash.length ? pagesMatchingHash[0].id : thisApp.pages[0].id);
   },
 
   activatePage: function (pageId) {
@@ -106,7 +110,7 @@ const app = {
     }
 
     for(let page of thisApp.pages) {
-      page.classList.toggle(classNames.nav.active, page.getAttribute('href') == pageId);
+      page.classList.toggle(classNames.pages.active, page.id == pageId);
     }
 
     window.location.hash = '#/' + pageId;
