@@ -14,6 +14,8 @@ export class DatePicker extends BaseWidget {
       select.widgets.datePicker.input
     );
 
+    thisWidget.dom.input.value = utils.dateToStr(new Date);
+
     thisWidget.initPlugin();
   }
 
