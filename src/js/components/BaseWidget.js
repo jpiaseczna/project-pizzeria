@@ -2,34 +2,9 @@ export class BaseWidget {
   constructor(wrapperElement, initialValue) {
     const thisWidget = this;
 
-    thisWidget.dom = {
-		wrapper = wrapperElement;
-		thisWidget.correctValue = initialValue;    	
-    }
-  }
-
-  parseValue(newValue) {
-  	return parseInt(newValue);
-  }
-
-  isValid(newValue) {
-  	return !isNan(newValue);
-  }
-
-  renderValue() {
-  	const thisWidget = this;
-
-  	console.log('widget.value:', thisWidget.value);
-  }
-
-  announce() {
-  	const thisWidget = this;
-
-  	const event = new CustomEvent('updated', {
-  		bubbles: true
-  	});
-
-  	thisWidget.dom.wrapper.dispatchEvent(event);
+    thisWidget.dom = {}
+	thisWidget.dom.wrapper = wrapperElement;
+	thisWidget.correctValue = initialValue;    	
   }
 
   get value() {
@@ -51,4 +26,27 @@ export class BaseWidget {
   	thisWidget.renderValue();
   }
 
+  parseValue(newValue) {
+  	return parseInt(newValue);
+  }
+
+  isValid(newValue) {
+  	return !isNaN(newValue);
+  }
+
+  renderValue() {
+  	const thisWidget = this;
+
+  	console.log('widget.value:', thisWidget.value);
+  }
+
+  announce() {
+  	const thisWidget = this;
+
+  	const event = new CustomEvent('updated', {
+  		bubbles: true
+  	});
+
+  	thisWidget.dom.wrapper.dispatchEvent(event);
+  }
 }  
