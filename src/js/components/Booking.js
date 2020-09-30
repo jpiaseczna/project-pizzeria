@@ -118,23 +118,30 @@ export class Booking {
       );
     }
 
-    for (let booking of bookings) {
-    	console.log('booking', booking);
+    for (let item of bookings) {
+    	console.log('bookings item', item);
 
-    	thisBooking.makeBooked(booking.date, booking.hour, booking.duration, booking.table);
+    	thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
     }
-    console.log('thisBooking.booked', thisBooking.booked);
   }
 
   makeBooked(date, hour, duration, table) {
     const thisBooking = this;
 
-    thisBooking.booked = {
-      [date]: {
-        [hour]: [table],
-      },
-    };
+    if(typeof thisBooking.booked[date] == 'undefined') {
+    	thisBooking.booked[date] = {};
+    }
+
+    const startHour = utils.hourToNumber(hour);
+
+    for(let hourBlock = startHour; hourBlock < startHour + duration; hourBlock +=0.5) {
+
+    	if(typeof thisBooking.booked[date][hourBlock] == 'undefined') {
+    		thisBooking.booked[date][hourBlock] = [];
+    	}
+
+    	thisBooking.booked[date][hourBlock].push(table);
+    }
     console.log('thisBooking.booked', thisBooking.booked);
   } 
-
 }
