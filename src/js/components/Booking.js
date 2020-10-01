@@ -96,6 +96,9 @@ export class Booking {
         ]);
       })
       .then(function ([bookings, eventsCurrent, eventsRepeat]) {
+        console.log(bookings);
+        console.log(eventsCurrent);
+        console.log(eventsRepeat);
         thisBooking.parseData(bookings, eventsCurrent, eventsRepeat);
       });
   }
@@ -119,29 +122,47 @@ export class Booking {
     }
 
     for (let item of bookings) {
-    	console.log('bookings item', item);
+      console.log('bookings item', item);
 
-    	thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
+      thisBooking.makeBooked(item.date, item.hour, item.duration, item.table);
+    }
+
+    for (let repEvent of eventsRepeat) {
+      console.log('repeating event', repEvent);
+
+      if (repEvent.repeat == 'daily') {
+
+      	const eventDateParse = new Date (repEvent.date);
+      	const maxDate = utils.addDays(repEvent.date, 14);
+
+      	for (let loopDate = eventDateParse; loopDate <= maxDate; loopDate = utils.addDays(loopDate, 1)) {
+
+      		thisBooking.makeBooked(utils.dateToStr(loopDate), repEvent.hour, repEvent.duration, repEvent.table);	
+      	}
+      }
     }
   }
 
   makeBooked(date, hour, duration, table) {
     const thisBooking = this;
 
-    if(typeof thisBooking.booked[date] == 'undefined') {
-    	thisBooking.booked[date] = {};
+    if (typeof thisBooking.booked[date] == 'undefined') {
+      thisBooking.booked[date] = {};
     }
 
     const startHour = utils.hourToNumber(hour);
 
-    for(let hourBlock = startHour; hourBlock < startHour + duration; hourBlock +=0.5) {
+    for (
+      let hourBlock = startHour;
+      hourBlock < startHour + duration;
+      hourBlock += 0.5
+    ) {
+      if (typeof thisBooking.booked[date][hourBlock] == 'undefined') {
+        thisBooking.booked[date][hourBlock] = [];
+      }
 
-    	if(typeof thisBooking.booked[date][hourBlock] == 'undefined') {
-    		thisBooking.booked[date][hourBlock] = [];
-    	}
-
-    	thisBooking.booked[date][hourBlock].push(table);
+      thisBooking.booked[date][hourBlock].push(table);
     }
     console.log('thisBooking.booked', thisBooking.booked);
-  } 
+  }
 }
