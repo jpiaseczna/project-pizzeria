@@ -188,13 +188,21 @@ export class Booking {
     thisBooking.date = thisBooking.datePicker.value;
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
 
+    const allAvailable = false;
+
+    if(
+      typeof thisBooking.booked[thisBooking.date] == 'undefined' &&
+      typeof thisBooking.booked[thisBooking.date][thisBooking.hour] == 'undefined'
+    ){
+      allAvailable = true;
+    }
+
     for (let table of thisBooking.dom.tables) {
       const tableNumber = table.getAttribute(settings.booking.tableIdAttribute);
       const tableId = parseInt(tableNumber);
 
       if (
-        typeof thisBooking.booked[thisBooking.date] == 'undefined' &&
-        typeof thisBooking.booked[thisBooking.date][thisBooking.hour] == 'undefined' &&
+        !allAvailable &&
         thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId)) 
       {
         table.classList.add('booked');
