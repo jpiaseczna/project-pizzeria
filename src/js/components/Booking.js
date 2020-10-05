@@ -49,6 +49,7 @@ export class Booking {
     thisBooking.dom.wrapper.addEventListener('updated', function () {
       thisBooking.updateDOM();
     });
+
   }
 
   getData() {
@@ -188,7 +189,7 @@ export class Booking {
     thisBooking.date = thisBooking.datePicker.value;
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
 
-    const allAvailable = false;
+    let allAvailable = false;
 
     if(
       typeof thisBooking.booked[thisBooking.date] == 'undefined' &&
@@ -209,6 +210,26 @@ export class Booking {
       } else {
         table.classList.remove('booked');
       }
+
+      if (!table.classList.contains('booked')) {
+      	table.addEventListener('click', function () {
+      		table.classList.toggle('selected');
+      	});
+      } else {
+      	table.classList.remove('selected');
+      }
+
+      table.addEventListener('update', function () {
+      	table.classList.remove('selected');
+      });
+
+      thisBooking.dom.datePicker.addEventListener('input', function () {
+      	table.classList.remove('selected');
+      });
+
+      thisBooking.dom.hourPicker.addEventListener('click', function () {
+      	table.classList.remove('selected');
+      });
     }
   }
 }
