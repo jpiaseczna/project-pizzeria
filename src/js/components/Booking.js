@@ -11,6 +11,7 @@ export class Booking {
     thisBooking.render(bookingWidgetContainer);
     thisBooking.initWidgets();
     thisBooking.getData();
+    thisBooking.selectTable();
   }
 
   render(bookingWidgetContainer) {
@@ -211,14 +212,23 @@ export class Booking {
       } else {
         table.classList.remove('booked', 'selected');
       }
-
-      if (!table.classList.contains('booked')) {
-        table.addEventListener('click', function () {
-          table.classList.toggle('selected');
-        });
-      } else {
-        table.classList.remove('selected');
-      }
     }
+  }
+
+  selectTable() {
+  	const thisBooking = this;
+
+  	for (let table of thisBooking.dom.tables) {
+
+  		if (!table.classList.contains('booked')) {
+
+  			table.addEventListener('click', function () {
+  				table.classList.toggle('selected');
+  				console.log('table selected', table.classList.contains('selected'));
+  			});
+  		} else {
+  			table.classList.remove('selected');
+  		}
+  	}
   }
 }
