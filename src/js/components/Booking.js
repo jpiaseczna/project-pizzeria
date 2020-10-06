@@ -49,7 +49,6 @@ export class Booking {
     thisBooking.dom.wrapper.addEventListener('updated', function () {
       thisBooking.updateDOM();
     });
-
   }
 
   getData() {
@@ -191,10 +190,11 @@ export class Booking {
 
     let allAvailable = false;
 
-    if(
+    if (
       typeof thisBooking.booked[thisBooking.date] == 'undefined' &&
-      typeof thisBooking.booked[thisBooking.date][thisBooking.hour] == 'undefined'
-    ){
+      typeof thisBooking.booked[thisBooking.date][thisBooking.hour] ==
+        'undefined'
+    ) {
       allAvailable = true;
     }
 
@@ -204,32 +204,21 @@ export class Booking {
 
       if (
         !allAvailable &&
-        thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId)) 
-      {
+        thisBooking.booked[thisBooking.date][thisBooking.hour].includes(tableId)
+      ) {
         table.classList.add('booked');
+    	table.classList.remove('selected');
       } else {
-        table.classList.remove('booked');
+        table.classList.remove('booked', 'selected');
       }
 
       if (!table.classList.contains('booked')) {
-      	table.addEventListener('click', function () {
-      		table.classList.toggle('selected');
-      	});
+        table.addEventListener('click', function () {
+          table.classList.toggle('selected');
+        });
       } else {
-      	table.classList.remove('selected');
+        table.classList.remove('selected');
       }
-
-      table.addEventListener('update', function () {
-      	table.classList.remove('selected');
-      });
-
-      thisBooking.dom.datePicker.addEventListener('input', function () {
-      	table.classList.remove('selected');
-      });
-
-      thisBooking.dom.hourPicker.addEventListener('click', function () {
-      	table.classList.remove('selected');
-      });
     }
   }
 }
