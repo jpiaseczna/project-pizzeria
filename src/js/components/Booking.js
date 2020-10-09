@@ -195,13 +195,17 @@ export class Booking {
         thisBooking.booked[date][hourBlock] = [];
       }
 
-      thisBooking.booked[date][hourBlock].push(table);
+      //thisBooking.booked[date][hourBlock].push(table);
+      for (let singleTable of table) {
+      	thisBooking.booked[date][hourBlock].push(singleTable);
+      }
     }
     //console.log('thisBooking.booked', thisBooking.booked);
   }
 
   updateDOM() {
     const thisBooking = this;
+    console.log(thisBooking.booked);
 
     thisBooking.date = thisBooking.datePicker.value;
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
