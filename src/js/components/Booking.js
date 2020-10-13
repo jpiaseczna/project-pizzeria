@@ -197,7 +197,7 @@ export class Booking {
 
       //thisBooking.booked[date][hourBlock].push(table);
       for (let singleTable of table) {
-      	thisBooking.booked[date][hourBlock].push(singleTable);
+        thisBooking.booked[date][hourBlock].push(singleTable);
       }
     }
     //console.log('thisBooking.booked', thisBooking.booked);
@@ -275,13 +275,13 @@ export class Booking {
 
     for (let table of thisBooking.dom.tables) {
 
-    	const tableNumber = table.getAttribute(settings.booking.tableIdAttribute);
-      	const tableId = parseInt(tableNumber);
+      const tableNumber = table.getAttribute(settings.booking.tableIdAttribute);
+      const tableId = parseInt(tableNumber);
 
-    	if (table.classList.contains('selected')) {
-    		payload.table.push(tableId);
-    		table.classList.replace('selected', 'booked');
-    	}
+      if (table.classList.contains('selected')) {
+        payload.table.push(tableId);
+        table.classList.replace('selected', 'booked');
+      }
     }
 
     const options = {
