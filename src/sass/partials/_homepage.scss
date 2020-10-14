@@ -74,3 +74,33 @@
   transform: translateY(-95px);
   font-weight: 300;
 }
+
+/* Carousel */
+
+.opinions-slider .slide {
+  display: flex;
+  flex: 0 0 50%;
+  height: 193px;
+  width: 100%;
+  margin: 50px auto;
+}
+
+.image img {
+  max-width: 193px;
+  height: 100%;
+  object-fit: cover;
+  margin: 40px 40px 40px 0;
+  border-radius: $radius;
+}
+
+.text {
+  margin-top: 50px;
+}
+
+.signature {
+  font-style: italic;
+}
+
+.flickity-page-dots {
+  bottom: -50px;
+}

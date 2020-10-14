@@ -9,6 +9,7 @@
   <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="vendor/range-slider.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/flickity@2.2.1/dist/flickity.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -83,6 +84,44 @@
         <div class="container opening-wrapper">
           <h1 class="h1">Opening hours:</h1>
           <p>tue-sun, 12pm-12am</p>
+        </div>
+        <div class="container opinions-slider js-flickity" data-flickity-options='{ "cellAlign": "center", "contain": true, "autoPlay": true, "prevNextButtons": false }'>          
+          <article class="slide">
+            <div class="image">
+              <img src="images/assets/pizza-3.jpg" alt="pizzeria">
+            </div>
+            <div class="text">
+              <h2 class="h2">Amazing service!</h2>
+              <p class="opinion">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam egestas viverra tortor, eu ullamcorper dui imperdiet nec. Nunc sed dolor at elit lobortis sodales.
+              </p>
+              <p class="signature">- Margaret Osborne</p>  
+            </div>  
+          </article>
+          <article class="slide">
+            <div class="image">
+              <img src="images/assets/pizza-3.jpg" alt="pizzeria">
+            </div>
+            <div class="text">
+              <h2 class="h2">Feels like Italy!</h2>
+              <p class="opinion">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam egestas viverra tortor, eu ullamcorper dui imperdiet nec. Nunc sed dolor at elit lobortis sodales.
+              </p>
+              <p class="signature">- Laura Monti</p>  
+            </div>
+          </article>
+          <article class="slide">
+            <div class="image">
+              <img src="images/assets/pizza-3.jpg" alt="pizzeria">
+            </div>
+            <div class="text">
+              <h2 class="h2">The best pizza ever!</h2>
+              <p class="opinion">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam egestas viverra tortor, eu ullamcorper dui imperdiet nec. Nunc sed dolor at elit lobortis sodales.
+              </p>
+              <p class="signature">- Albert Blixen</p>  
+            </div>
+          </article>   
         </div>    
       </section>  
       <section id="order">
@@ -269,6 +308,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="vendor/range-slider.min.js"></script>
+  <script src="https://unpkg.com/flickity@2.2.1/dist/flickity.pkgd.min.js"></script>
   <script src="js/app.js" type="module"></script>
 </body>
 </html>
