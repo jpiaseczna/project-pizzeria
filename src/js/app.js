@@ -76,6 +76,9 @@ const app = {
     thisApp.navLinks = Array.from(document.querySelectorAll(select.nav.links));
     console.log(thisApp.navLinks);
 
+    thisApp.pageLinks = Array.from(document.querySelectorAll('.link'));
+    console.log(thisApp.pageLinks);
+
     let pagesMatchingHash = [];
 
     if(window.location.hash.length > 2) {
@@ -96,6 +99,17 @@ const app = {
 
         /* TODO: activate page */
         thisApp.activatePage(pageId);
+      });
+    }
+
+    for(let link of thisApp.pageLinks) {
+      link.addEventListener('click', function(event) {
+        const clickedElement = this;
+        event.preventDefault();
+
+        const pageId = clickedElement.getAttribute('href').replace('#', '');
+        thisApp.activatePage(pageId);
+        link.classList.add('active');
       });
     }
 
