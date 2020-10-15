@@ -32,18 +32,30 @@ export class AmountWidget extends BaseWidget {
   initActions() {
     const thisWidget = this;
 
+    const hoursWidget = document.getElementsByName('hours');
+
     thisWidget.dom.input.addEventListener('change', function () {
       thisWidget.value = thisWidget.dom.input.value;
     });
 
     thisWidget.dom.linkDecrease.addEventListener('click', function (event) {
       event.preventDefault();
-      thisWidget.value = thisWidget.value - 1;
+
+      if (thisWidget == hoursWidget) {
+        thisWidget.value = thisWidget.value - 0.5;
+      } else {
+        thisWidget.value = thisWidget.value - 1;
+      } 
     });
 
     thisWidget.dom.linkIncrease.addEventListener('click', function (event) {
       event.preventDefault();
-      thisWidget.value = thisWidget.value + 1;
+
+      if (thisWidget == hoursWidget) {
+        thisWidget.value = thisWidget.value + 0.5;
+      } else {
+        thisWidget.value = thisWidget.value + 1;
+      }
     });
   }
 
@@ -51,5 +63,11 @@ export class AmountWidget extends BaseWidget {
     const thisWidget = this;
 
     thisWidget.dom.input.value = thisWidget.value;
+  }
+
+  parseValue(newValue) {
+    const thisWidget = this;
+
+    return parseFloat(newValue);
   }
 }

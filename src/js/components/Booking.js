@@ -195,7 +195,6 @@ export class Booking {
         thisBooking.booked[date][hourBlock] = [];
       }
 
-      //thisBooking.booked[date][hourBlock].push(table);
       for (let singleTable of table) {
         thisBooking.booked[date][hourBlock].push(singleTable);
       }
