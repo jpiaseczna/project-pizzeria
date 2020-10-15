@@ -41,7 +41,7 @@ export class AmountWidget extends BaseWidget {
     thisWidget.dom.linkDecrease.addEventListener('click', function (event) {
       event.preventDefault();
 
-      if (thisWidget == hoursWidget) {
+      if (thisWidget.dom.input == document.querySelector('.hours-amount input')) {
         thisWidget.value = thisWidget.value - 0.5;
       } else {
         thisWidget.value = thisWidget.value - 1;
@@ -51,7 +51,7 @@ export class AmountWidget extends BaseWidget {
     thisWidget.dom.linkIncrease.addEventListener('click', function (event) {
       event.preventDefault();
 
-      if (thisWidget == hoursWidget) {
+      if (thisWidget.dom.input == document.querySelector('.hours-amount input')) {
         thisWidget.value = thisWidget.value + 0.5;
       } else {
         thisWidget.value = thisWidget.value + 1;
@@ -65,7 +65,7 @@ export class AmountWidget extends BaseWidget {
     thisWidget.dom.input.value = thisWidget.value;
   }
 
-  parseValue(newValue) {
+   parseValue(newValue) {
     const thisWidget = this;
 
     return parseFloat(newValue);
