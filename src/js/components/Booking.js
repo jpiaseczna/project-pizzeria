@@ -231,6 +231,8 @@ export class Booking {
         table.classList.remove('booked', 'selected');
       }
     }
+
+    thisBooking.blockOverbooking();
   }
 
   selectTable() {
@@ -251,14 +253,14 @@ export class Booking {
   blockOverbooking() {
     const thisBooking = this;
 
-    const maxDuration = 24 - thisBooking.hour;
-    const bookingButton = document.querySelector('booking-button');
+    const maxDuration = 24 - utils.hourToNumber(thisBooking.hourPicker.value);     
+    const bookingButton = document.querySelector('#booking-button');
     console.log('maxDuration:', maxDuration);
 
    if (thisBooking.hoursAmount.value > maxDuration) {
       bookingButton.disabled = true;
-      alert("Your booking duration is too long - the opening hours are 12pm-12am. Please set another duration.");
-    }
+      alert("Your booking duration is too long - the opening hours are 12pm-12am. Please set other duration.");
+    }   
   }
 
   sendBooking() {
