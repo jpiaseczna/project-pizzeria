@@ -32,8 +32,6 @@ export class AmountWidget extends BaseWidget {
   initActions() {
     const thisWidget = this;
 
-    const hoursWidget = document.getElementsByName('hours');
-
     thisWidget.dom.input.addEventListener('change', function () {
       thisWidget.value = thisWidget.dom.input.value;
     });
@@ -65,7 +63,7 @@ export class AmountWidget extends BaseWidget {
     thisWidget.dom.input.value = thisWidget.value;
   }
 
-   parseValue(newValue) {
+  parseValue(newValue) {
     const thisWidget = this;
 
     return parseFloat(newValue);
