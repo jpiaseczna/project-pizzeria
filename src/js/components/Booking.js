@@ -12,7 +12,6 @@ export class Booking {
     thisBooking.initWidgets();
     thisBooking.getData();
     thisBooking.selectTable();
-    thisBooking.blockOverbooking();
   }
 
   render(bookingWidgetContainer) {
@@ -229,7 +228,7 @@ export class Booking {
         table.classList.remove('selected');
       } else {
         table.classList.remove('booked', 'selected');
-      }
+      }  
     }
 
     thisBooking.blockOverbooking();
@@ -257,10 +256,25 @@ export class Booking {
     const bookingButton = document.querySelector('#booking-button');
     console.log('maxDuration:', maxDuration);
 
-   if (thisBooking.hoursAmount.value > maxDuration) {
+    if (thisBooking.hoursAmount.value > maxDuration) {
       bookingButton.disabled = true;
-      alert("Your booking duration is too long - the opening hours are 12pm-12am. Please set other duration.");
-    }   
+      alert('Your booking duration is too long - the opening hours are 12pm-12am. Please set other duration.');
+    }  
+
+    for (let table of thisBooking.dom.tables) {
+
+      const tableNumber = table.getAttribute(settings.booking.tableIdAttribute);
+      const tableId = parseInt(tableNumber);
+
+      for (let hour in thisBooking.booked[thisBooking.date]) {
+        console.log(hour);
+
+        if (hour.includes(tableId)) {
+          bookingButton.disabled = true;
+          alert('This table is already booked within this time. Please set other duration.');
+        }  
+      }
+    }
   }
 
   sendBooking() {

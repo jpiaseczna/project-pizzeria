@@ -64,8 +64,6 @@ export class AmountWidget extends BaseWidget {
   }
 
   parseValue(newValue) {
-    const thisWidget = this;
-
     return parseFloat(newValue);
   }
 }
