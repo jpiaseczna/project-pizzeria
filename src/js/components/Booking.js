@@ -259,21 +259,23 @@ export class Booking {
     if (thisBooking.hoursAmount.value > maxDuration) {
       bookingButton.disabled = true;
       alert('Your booking duration is too long - the opening hours are 12pm-12am. Please set other duration.');
-    }  
+    }
 
-    for (let table of thisBooking.dom.tables) {
+    for (let hour in thisBooking.booked[thisBooking.date]) {
+      console.log(hour);
 
-      const tableNumber = table.getAttribute(settings.booking.tableIdAttribute);
-      const tableId = parseInt(tableNumber);
+      const tables = document.querySelectorAll('.table');
 
-      for (let hour in thisBooking.booked[thisBooking.date]) {
-        console.log(hour);
+      for (let table of tables) {
+
+        const tableNumber = table.getAttribute(settings.booking.tableIdAttribute);
+        const tableId = parseInt(tableNumber);
 
         if (hour.includes(tableId)) {
           bookingButton.disabled = true;
           alert('This table is already booked within this time. Please set other duration.');
-        }  
-      }
+        } 
+      }   
     }
   }
 
