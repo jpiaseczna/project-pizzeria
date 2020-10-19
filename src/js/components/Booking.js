@@ -230,8 +230,6 @@ export class Booking {
         table.classList.remove('booked', 'selected');
       }  
     }
-
-    thisBooking.blockOverbooking();
   }
 
   selectTable() {
@@ -241,6 +239,7 @@ export class Booking {
       if (!table.classList.contains('booked')) {
         table.addEventListener('click', function () {
           table.classList.toggle('selected');
+          thisBooking.blockOverbooking(table);
           console.log('table selected', table.classList.contains('selected'));
         });
       } else {
@@ -249,33 +248,25 @@ export class Booking {
     }
   }
 
-  blockOverbooking() {
+  blockOverbooking(table) {
     const thisBooking = this;
 
     const maxDuration = 24 - utils.hourToNumber(thisBooking.hourPicker.value);     
     const bookingButton = document.querySelector('#booking-button');
+    const thisHour = utils.hourToNumber(thisBooking.hourPicker.value);
     console.log('maxDuration:', maxDuration);
 
     if (thisBooking.hoursAmount.value > maxDuration) {
       bookingButton.disabled = true;
       alert('Your booking duration is too long - the opening hours are 12pm-12am. Please set other duration.');
     }
+  
+    const tableNumber = table.getAttribute(settings.booking.tableIdAttribute);
+    const tableId = parseInt(tableNumber);
 
-    for (let hour in thisBooking.booked[thisBooking.date]) {
-      console.log(hour);
-
-      const tables = document.querySelectorAll('.table');
-
-      for (let table of tables) {
-
-        const tableNumber = table.getAttribute(settings.booking.tableIdAttribute);
-        const tableId = parseInt(tableNumber);
-
-        if (hour.includes(tableId)) {
-          bookingButton.disabled = true;
-          alert('This table is already booked within this time. Please set other duration.');
-        } 
-      }   
+    if (thisBooking.booked[thisBooking.date][thisHour].includes(tableId)) {
+      bookingButton.disabled = true;
+      alert('This table is already booked within this time. Please set other duration.');
     }
   }
 
