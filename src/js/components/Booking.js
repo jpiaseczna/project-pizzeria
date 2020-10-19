@@ -264,9 +264,12 @@ export class Booking {
     const tableNumber = table.getAttribute(settings.booking.tableIdAttribute);
     const tableId = parseInt(tableNumber);
 
-    if (thisBooking.booked[thisBooking.date][thisHour].includes(tableId)) {
-      bookingButton.disabled = true;
-      alert('This table is already booked within this time. Please set other duration.');
+    for (let hourBlock = thisHour; hourBlock < thisHour + thisBooking.hoursAmount.value; hourBlock += 0.5) {
+
+      if (thisBooking.booked[thisBooking.date][hourBlock].includes(tableId)) {
+        bookingButton.disabled = true;
+        alert('This table is already booked within this time. Please set other duration.');
+      }
     }
   }
 
